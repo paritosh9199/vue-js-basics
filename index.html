@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue basics</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="vue.js"></script>
+    <style>
+        #canvas {
+            width: 600px;
+            padding: 200px 20px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        span {
+            background: red;
+            display: inline-block;
+            padding: 10px;
+            color: #fff;
+            margin: 10px 0;
+        }
+
+        .available span {
+            background: green;
+        }
+
+        .nearby span:after {
+            content: "nearby";
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="vue-app">
+
+
+        <a :href="website">":" is a shortcut for bind</a>
+        <input type="text" :value="name">
+        <p>job: {{job}}</p>
+        {{greet(Date.now())}}
+        <span v-html="websiteTag"></span>
+
+        <br>
+        <hr>
+        <h1>Events</h1>
+        <p>My age is {{age}}</p>
+        <!-- v-on:click.once is an event modifier -->
+        <button v-on:click.once="addY()">Add a year</button>
+        <button v-on:click="subY()">Sub a Year</button>
+        <br>
+        <button @dblclick="addY(10)">Add 10 year</button>
+        <button @dblclick="subY(10)">Sub 10 Year</button>
+
+        <!-- @ is shortcut for v-on -->
+        <div id="canvas" @mousemove="updatecoord">{{x}},{{y}}</div>
+
+        <a @click.prevent="clickMe()" href="http://paritosh.ml">ClickMe</a>
+
+        <br>
+
+        <hr>
+        <h1>Keyboard Event</h1>
+        <input @keyup.enter="logName()" type="text">
+        <br>
+        <!-- two way data biding -->
+        <input @keyup="logName()" placeholder="name" type="text" v-model="name">
+        <input @keyup="logAge()" placeholder="age" type="number" v-model="age">
+
+        <hr>
+        <br>
+
+        <h1>Computed Propperties</h1>
+        <p>like methods but are only run when needed</p>
+        <button v-on:click="a++">Add to A</button>
+        <button v-on:click="b++">Add to B</button>
+        <p>A - {{ a }}</p>
+        <p>B - {{ b }}</p>
+        <p>Age + A = {{ addToA }}</p>
+        <p>Age + B = {{ addToB }}</p>
+
+        <hr>
+        <br>
+
+        <h1>Dynamic CSS</h1>
+        <button v-on:click="nearby = !nearby">Toggle nearby</button>
+        <button v-on:click="available = !available">Toggle available</button>
+        <div v-bind:class="compClasses">
+            <span>Toka</span>
+        </div>
+
+        <hr>
+        <br>
+
+        <h1>Conditional</h1>
+        <p>vif and vshow</p>
+    </div>
+
+    <!-- {{name}} -->
+    <script src="app.js"></script>
+</body>
+
+</html>
